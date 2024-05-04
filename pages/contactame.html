@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=League+Spartan:wght@700&display=swap" rel="stylesheet">
+    <!--FIN FONTS-->
+    <link rel="stylesheet" href="/css/style.css">
     <title>Juego de dados- Contactame page</title>
 </head>
-<body>
-    
+<body class="body-contactame">
+    <header>
+        <h1 class="titulo">🎲 Dados Game </h1>
+    </header>
+
+    <form class="body-form">
+        <div class="form-body">
+        <h2>Contactame</h2>
+        <div class="input-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name" placeholder="Nombre">
+
+            <label for="phone">Telefono</label>
+            <input type="tel" name="phone" id="phone" placeholder="Telefono">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Email">
+
+            <label for="message">Mensaje</label>
+            <textarea name="message" id="message" cols="30" rows="5" placeholder="Mensaje"></textarea>
+
+            <div class="form-txt">
+                <a href="#">Politica de privacidad</a>
+                <a href="#">Terminos y condiciones</a>
+            </div>    
+
+            <input class="btn" type="submit" value="Enviar">
+        </div>
+        </div>
+    </form>
+
+
+
+    <script src="/js/main.js"></script>
 </body>
 </html>
