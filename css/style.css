@@ -19,6 +19,11 @@
     font-family: "Bebas Neue", sans-serif;
 }
 
+.titulo, a {
+    text-decoration: none;
+    color: black;
+}
+
 .body-form {
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
@@ -33,6 +38,13 @@
     border-radius: 20px;
     text-align: center;
     width: 500px;
+}
+
+#success-message {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 30px;
+    align-items: center;
+    color: #751b07;
 }
 
 .input-group {
