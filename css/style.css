@@ -172,6 +172,16 @@ input::placeholder, textarea::placeholder {
     }
 }
 
+select {
+    padding: 17px 25px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    background-color: #ffcbbb;
+    border: 2px solid #fff6f4;
+    color: #7e7272;
+    outline: none;
+}
+
 .boton-dado {
     display: flex;
     justify-content: center;
@@ -196,6 +206,7 @@ input::placeholder, textarea::placeholder {
 .contactame-text {
     text-decoration: none;
     color: #751b07;
+    font-family: "Anton SC", sans-serif;
 }
 
 p {
