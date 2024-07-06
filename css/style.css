@@ -140,17 +140,36 @@ input::placeholder, textarea::placeholder {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Estilos para los dados en la página de inicio */
+
 .imagen-dado {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 90px;
+    flex-wrap: wrap; /* Permite que los elementos se organicen en varias líneas */
 }
 
 .tamanio-dado {
-    width: 300px;
+    width: 20%; /* Tamaño inicial como porcentaje del contenedor */
+    max-width: 200px; /* Tamaño máximo en píxeles */
     border: 2px solid rgb(211, 211, 211);
     box-shadow: 0 0 20px rgb(148, 148, 148);
+    margin: 10px; /* Espacio entre los dados */
+}
+
+@media (max-width: 768px) {
+    .tamanio-dado {
+        width: 30%; /* Reducir el tamaño de los dados en pantallas más pequeñas */
+        max-width: 100px; /* Reducir el tamaño máximo en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .tamanio-dado {
+        width: 50%; /* Ajustar tamaño para pantallas muy pequeñas */
+        max-width: 80px; /* Reducir aún más el tamaño máximo */
+    }
 }
 
 .boton-dado {
