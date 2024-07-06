@@ -173,8 +173,8 @@ input::placeholder, textarea::placeholder {
 }
 
 select {
-    padding: 17px 25px;
-    border-radius: 25px;
+    padding: 15px 25px;
+    border-radius: 28px;
     margin-bottom: 20px;
     background-color: #ffcbbb;
     border: 2px solid #fff6f4;
@@ -194,6 +194,7 @@ select {
     padding: 20px 30px 20px 30px;
     font-size: 30px;
 }
+
 
 .footer {
     display: flex;
