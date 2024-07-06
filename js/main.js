@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Función para mostrar los resultados en el DOM
     function mostrarResultados(resultados) {
-        resultadoDiv.innerHTML = `<p>Resultados: ${resultados.join(', ')}</p>`;
+        resultadoDiv.innerHTML = `<p class="resultados">Resultados: ${resultados.join(', ')}</p>`;
     }
 
     // Función para cambiar las imágenes de los dados según los resultados
