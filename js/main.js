@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Variables para seleccionar elementos del DOM
     const numDadosSelect = document.querySelector('select[name="Num-dados"]');
     const numCarasSelect = document.querySelector('select[name="Num-caras"]');
     const tirarDadoBtn = document.querySelector('.tirar-dado');
     const imagenDadoContainer = document.querySelector('.imagen-dado');
     const resultadoDiv = document.createElement('div');
     imagenDadoContainer.appendChild(resultadoDiv);
-  
+
     // Inicializar opciones de cantidad de dados y caras
     initOptions();
 
@@ -26,13 +25,20 @@ document.addEventListener("DOMContentLoaded", () => {
             numDadosSelect.appendChild(option);
         }
 
-        // Opciones para la cantidad de caras de los dados
-        [4, 6, 8, 10, 12, 20].forEach(caras => {
-            const option = document.createElement('option');
-            option.value = caras;
-            option.textContent = caras;
-            numCarasSelect.appendChild(option);
-        });
+        // Cargar datos desde el JSON y actualizar las opciones de caras
+        fetch('/data/dados.json')
+            .then(response => response.json())
+            .then(data => {
+                data.dados.forEach(dado => {
+                    const option = document.createElement('option');
+                    option.value = dado.caras;
+                    option.textContent = dado.caras;
+                    numCarasSelect.appendChild(option);
+                });
+                // Recuperar configuración guardada en localStorage
+                cargarConfiguracionLocalStorage();
+            })
+            .catch(error => console.error('Error al cargar datos:', error));
     }
 
     // Función para actualizar las imágenes de los dados según la cantidad seleccionada
@@ -47,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             imagenDadoContainer.appendChild(img);
         }
         imagenDadoContainer.appendChild(resultadoDiv); // Reagregar el div de resultados
+        guardarConfiguracionLocalStorage(); // Guardar la configuración en localStorage
     }
 
     // Función para tirar los dados y mostrar el resultado
@@ -61,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mostrarResultados(resultados);
         cambiarImagenesDados(resultados, numCaras);
+        guardarConfiguracionLocalStorage(); // Guardar la configuración en localStorage
     }
 
     // Función para mostrar los resultados en el DOM
@@ -75,23 +83,30 @@ document.addEventListener("DOMContentLoaded", () => {
             if (numero >= 1 && numero <= numCaras) {
                 dados[index].src = `/imagenes/dado${numero}.png`;
             } else {
-                // Manejar casos donde el número está fuera del rango de imágenes disponibles
                 console.log('Número de dado fuera del rango de imágenes disponibles');
             }
         });
+
+        // Usar GSAP para animar las imágenes de los dados
+        gsap.fromTo(".tamanio-dado", { opacity: 0, y: -50 }, { opacity: 1, y: 0, duration: 0.5 });
     }
-  
-    // Ejemplo de uso de AJAX para cargar datos desde un JSON local
-    fetch('/data/dados.json')
-        .then(response => response.json())
-        .then(data => {
-            console.log('Datos de ejemplo cargados:', data);
-        })
-        .catch(error => console.error('Error al cargar datos:', error));
-  
-    // Ejemplo de una librería de animación (usando GSAP)
-    gsap.from(".tamanio-dado", { duration: 2, x: 300, opacity: 0, scale: 0.5 });
+
+    // Función para guardar la configuración en localStorage
+    function guardarConfiguracionLocalStorage() {
+        const configuracion = {
+            numDados: numDadosSelect.value,
+            numCaras: numCarasSelect.value
+        };
+        localStorage.setItem('configuracionDados', JSON.stringify(configuracion));
+    }
+
+    // Función para cargar la configuración desde localStorage
+    function cargarConfiguracionLocalStorage() {
+        const configuracion = JSON.parse(localStorage.getItem('configuracionDados'));
+        if (configuracion) {
+            numDadosSelect.value = configuracion.numDados;
+            numCarasSelect.value = configuracion.numCaras;
+            actualizarImagenesDados();
+        }
+    }
 });
-
-
-// CONTACTOS PAGE 

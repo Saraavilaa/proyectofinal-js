@@ -1,0 +1,10 @@
+{
+    "dados": [
+        { "caras": 4, "imagen": "/imagenes/dado4.png" },
+        { "caras": 6, "imagen": "/imagenes/dado6.png" },
+        { "caras": 8, "imagen": "/imagenes/dado8.png" },
+        { "caras": 10, "imagen": "/imagenes/dado10.png" },
+        { "caras": 12, "imagen": "/imagenes/dado12.png" },
+        { "caras": 20, "imagen": "/imagenes/dado20.png" }
+    ]
+}
