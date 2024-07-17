@@ -1,49 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Asegurarnos de que el formulario exista
     const form = document.querySelector('.body-form form');
     const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
     if (!form) {
         console.error('Formulario no encontrado');
         return;
     }
 
-    // Event listener para el formulario de contacto
     form.addEventListener('submit', event => {
         event.preventDefault();
         enviarFormulario();
     });
 
-    // Función para enviar el formulario
     function enviarFormulario() {
         const nombre = document.getElementById('name').value;
         const telefono = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
         const mensaje = document.getElementById('message').value;
 
-        // Validar los campos del formulario
+        // Ocultar mensajes anteriores
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
+
         if (!nombre || !telefono || !email || !mensaje) {
-            alert('Por favor, complete todos los campos.');
+            mostrarError('Por favor, complete todos los campos.');
             return;
         }
 
-        // Validar que el campo de teléfono solo contenga números
         if (!/^\d+$/.test(telefono)) {
-            alert('Por favor, ingrese un número de teléfono válido.');
+            mostrarError('Por favor, ingrese un número de teléfono válido.');
             return;
         }
 
-        // Simular el envío de datos (aquí podrías usar fetch para enviar a un servidor)
-        console.log('Formulario enviado:', { nombre, telefono, email, mensaje });
+        const formData = { nombre, telefono, email, mensaje };
 
-        // Mostrar mensaje de éxito
+        fetch('/api/contacto', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.successMessage) {
+                mostrarExito(data.successMessage);
+                form.reset();
+            }
+        })
+        .catch(error => {
+            mostrarError('Error al enviar el formulario: ' + error.message);
+        });
+    }
+
+    function mostrarExito(mensaje) {
+        successMessage.textContent = mensaje;
         successMessage.style.display = 'block';
 
-        // Ocultar el mensaje de éxito después de 7 segundos
         setTimeout(() => {
             successMessage.style.display = 'none';
         }, 3000);
+    }
 
-        // Limpiar el formulario
-        form.reset();
+    function mostrarError(mensaje) {
+        errorMessage.textContent = mensaje;
+        errorMessage.style.display = 'block';
+
+        setTimeout(() => {
+            errorMessage.style.display = 'none';
+        }, 3000);
     }
 });
