@@ -2,8 +2,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Asegurarnos de que el formulario exista
     const form = document.querySelector('.body-form form');
     const successMessage = document.getElementById('success-message');
+    
     if (!form) {
-        console.error('Formulario no encontrado');
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Formulario no encontrado",
+          });
         return;
     }
 
@@ -22,23 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Validar los campos del formulario
         if (!nombre || !telefono || !email || !mensaje) {
-            alert('Por favor, complete todos los campos.');
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Completa todos los campos del formulario",
+                showConfirmButton: false,
+                timer: 3500
+              });
             return;
         }
 
         // Validar que el campo de teléfono solo contenga números
         if (!/^\d+$/.test(telefono)) {
-            alert('Por favor, ingrese un número de teléfono válido.');
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Coloca un numero valido",
+              });
             return;
         }
-
-        // Simular el envío de datos (aquí podrías usar fetch para enviar a un servidor)
-        console.log('Formulario enviado:', { nombre, telefono, email, mensaje });
 
         // Mostrar mensaje de éxito
         successMessage.style.display = 'block';
 
-        // Ocultar el mensaje de éxito después de 7 segundos
+        // Ocultar el mensaje de éxito después de 3 segundos
         setTimeout(() => {
             successMessage.style.display = 'none';
         }, 3000);
